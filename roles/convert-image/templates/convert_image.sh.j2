@@ -46,13 +46,13 @@ useradd {{ undercloud_user }}
 echo "{{ undercloud_user }} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/{{ undercloud_user }}
 chmod 0440 /etc/sudoers.d/{{ undercloud_user }}
 
-mkdir /home/{{ undercloud_user }}/.ssh
+mkdir /var/home/{{ undercloud_user }}/.ssh
 
 echo "127.0.0.1  undercloud localhost" > /etc/hosts
 echo "HOSTNAME=undercloud" >> /etc/sysconfig/network
 echo "undercloud" > /etc/hostname
 
-chown -R {{ undercloud_user }}:{{ undercloud_user }} /home/{{ undercloud_user }}/
+chown -R {{ undercloud_user }}:{{ undercloud_user }} /var/home/{{ undercloud_user }}/
 
 # Add a 4GB swap file to the Undercloud
 dd if=/dev/zero of=/swapfile bs=1024 count=4194304

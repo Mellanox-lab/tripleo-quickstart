@@ -139,11 +139,11 @@
     source {{ working_dir }}/libguestf-env.sh &&
     virt-customize -v -a {{ working_dir }}/undercloud.qcow2
     --run-command 'id -u zuul &>/dev/null || useradd zuul'
-    --mkdir /home/zuul/.ssh
-    --run-command 'cp /root/.ssh/authorized_keys /home/zuul/.ssh/'
-    --run-command 'chown -R zuul:zuul /home/zuul/.ssh'
-    --run-command 'chmod 0700 /home/zuul/.ssh'
-    --run-command 'chmod 0600 /home/zuul/.ssh/authorized_keys'
+    --mkdir /var/home/zuul/.ssh
+    --run-command 'cp /root/.ssh/authorized_keys /var/home/zuul/.ssh/'
+    --run-command 'chown -R zuul:zuul /var/home/zuul/.ssh'
+    --run-command 'chmod 0700 /var/home/zuul/.ssh'
+    --run-command 'chmod 0600 /var/home/zuul/.ssh/authorized_keys'
     --run-command 'echo "zuul ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/zuul'
     --run-command 'chmod 0440 /etc/sudoers.d/zuul'
     --selinux-relabel

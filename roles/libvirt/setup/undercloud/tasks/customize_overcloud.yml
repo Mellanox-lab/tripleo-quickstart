@@ -19,7 +19,7 @@
     - name: Extract {{ overcloud_image }} image
       command: >
         virt-copy-out -a {{ working_dir }}/undercloud.qcow2
-        /home/{{ undercloud_user }}/{{ overcloud_image }}.qcow2 {{ working_dir }}
+        /var/home/{{ undercloud_user }}/{{ overcloud_image }}.qcow2 {{ working_dir }}
       when: not overcloud_image_stat_for_customize.stat.exists
 
     # only customize {{ overcloud_image }} image if that is not going to be
@@ -32,4 +32,4 @@
     - name: Copy updated {{ overcloud_image }} image back to undercloud
       command: >
         virt-copy-in -a {{ working_dir }}/undercloud.qcow2
-        {{ working_dir }}/{{ overcloud_image }}.qcow2 /home/{{ undercloud_user }}/
+        {{ working_dir }}/{{ overcloud_image }}.qcow2 /var/home/{{ undercloud_user }}/

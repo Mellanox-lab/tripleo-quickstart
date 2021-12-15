@@ -122,7 +122,9 @@ install_deps () {
     else
         MODULE_NAMES="pip virtualenv setuptools"
     fi
-    rpm -q sudo || $(package_manager) install sudo
+    if ! type -path sudo ; then
+        $(package_manager) install sudo
+    fi
     sudo -n true && passwordless_sudo="1" || passwordless_sudo="0"
     if [[ "$passwordless_sudo" == "1" ]] || [ "$USER_OVERRIDE_SUDO_CHECK" == "1" ]; then
         if [ "$(python_cmd)" == "python3" ]; then

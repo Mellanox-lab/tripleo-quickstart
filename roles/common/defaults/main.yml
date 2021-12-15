@@ -14,7 +14,7 @@ overcloud_user: heat-admin
 
 # This is where we store generated artifacts (like ssh config files,
 # keys, deployment scripts, etc) on the undercloud.
-working_dir: "/home/{{ undercloud_user }}"
+working_dir: "/var/home/{{ undercloud_user }}"
 
 # This is a directory no the virthost in which we store the downloaded
 # undercloud image.

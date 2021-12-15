@@ -15,5 +15,6 @@
     state: present
     shell: /bin/bash
     create_home: true
+    home: "/var/home/{{ non_root_user }}"
   become: true
   when: not chrooted|bool
