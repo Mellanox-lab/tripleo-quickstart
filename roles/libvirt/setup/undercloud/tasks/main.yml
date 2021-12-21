@@ -134,7 +134,9 @@
     - name: Inject undercloud ssh public key to appliance
       command: >
         virt-customize -a {{ working_dir }}/undercloud.qcow2
-        --mkdir {{ item.homedir }}/.ssh/
+        --run-command 'mkdir -p {{ item.homedir }}'
+        --run-command 'chown {{ item.owner }}:{{ item.group }} {{ item.homedir }}'
+        --run-command 'mkdir -p {{ item.homedir }}/.ssh/'
         --upload '{{ working_dir }}/id_rsa_undercloud.pub:{{ item.homedir }}/.ssh/authorized_keys'
         --run-command 'chown -R {{ item.owner }}:{{ item.group }} {{ item.homedir }}/.ssh'
         --run-command 'chmod 0700 {{ item.homedir }}/.ssh'

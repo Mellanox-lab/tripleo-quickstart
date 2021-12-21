@@ -71,7 +71,8 @@
   when: vbmc_libvirt_uri is not defined
 
 - name: Install VirtualBMC package
-  when: release not in ['newton']
+  # when: release not in ['newton']
+  when: release not in ['newton', 'ocata', 'pike', 'queens']
   package:
     name: "{{ virtualbmc_packages }}"
     state: present
@@ -87,7 +88,8 @@
   become: true
 
 - name: Create the Virtual BMCs
-  when: release not in ['newton']
+  # when: release not in ['newton']
+  when: release not in ['newton', 'ocata', 'pike', 'queens']
   command: "vbmc add {{ item.name }} --port {{ item.virtualbmc_port }} --libvirt-uri {{ vbmc_libvirt_uri }}"
   args:
     creates: /root/.vbmc/{{ item.name }}/config

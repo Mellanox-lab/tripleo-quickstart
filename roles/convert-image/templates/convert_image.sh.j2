@@ -40,13 +40,30 @@ ONBOOT="yes"
 TYPE="Ethernet"
 EOF
 fi
+if [ ! -f /etc/sysconfig/network-scripts/ifcfg-ens3 ]; then
+cat >/etc/sysconfig/network-scripts/ifcfg-ens3<<EOF
+DEVICE="ens3"
+BOOTPROTO="dhcp"
+ONBOOT="yes"
+TYPE="Ethernet"
+EOF
+fi
+if [ ! -f /etc/sysconfig/network-scripts/ifcfg-ens4 ]; then
+cat >/etc/sysconfig/network-scripts/ifcfg-ens4<<EOF
+DEVICE="ens4"
+BOOTPROTO="dhcp"
+ONBOOT="yes"
+TYPE="Ethernet"
+EOF
+fi
 {% endif %}
 
-useradd {{ undercloud_user }}
+mkdir -p /var/home
+useradd -d /var/home/{{ undercloud_user }} {{ undercloud_user }}
 echo "{{ undercloud_user }} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/{{ undercloud_user }}
 chmod 0440 /etc/sudoers.d/{{ undercloud_user }}
 
-mkdir /var/home/{{ undercloud_user }}/.ssh
+mkdir -p /var/home/{{ undercloud_user }}/.ssh
 
 echo "127.0.0.1  undercloud localhost" > /etc/hosts
 echo "HOSTNAME=undercloud" >> /etc/sysconfig/network

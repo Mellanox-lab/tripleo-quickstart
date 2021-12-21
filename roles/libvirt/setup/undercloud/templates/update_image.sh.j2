@@ -8,7 +8,8 @@
 timeout -s 15 -k 1200 900 bash << EOS
     set -x
     {% if ansible_pkg_mgr == "yum" %}
-    sed -i -e "/proxy\=/d" /etc/yum.conf
+    # sed -i -e "/proxy\=/d" /etc/yum.conf
+    sed -i -e "s#^proxy\=.*#proxy=http://10.210.9.1:3128" /etc/yum.conf
     {% endif %}
 
     {{ ansible_pkg_mgr }} update -y
